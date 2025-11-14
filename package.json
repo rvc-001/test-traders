@@ -1,0 +1,21 @@
+{
+  "name": "turbo-racers-starter",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "compile": "hardhat compile",
+    "deploy": "hardhat run --network localhost scripts/deploy.js",
+    "start-api": "node server.js"
+  },
+  "dependencies": {
+    "@openzeppelin/contracts": "^5.4.0",
+    "body-parser": "^1.20.2",
+    "dotenv": "^16.0.0",
+    "ethers": "5.8.0",
+    "express": "^4.18.2"
+  },
+  "devDependencies": {
+    "@nomicfoundation/hardhat-toolbox": "^2.0.0",
+    "hardhat": "^2.17.0"
+  }
+}

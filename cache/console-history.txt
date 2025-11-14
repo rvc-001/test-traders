@@ -1,0 +1,3 @@
+const turbo = await ethers.getContractAt("TurboRacers","0x5fbdb2315678afecb367f032d93f642f64180aa3");console.log('owner =', await turbo.owner());console.log('priceUpdater =', await turbo.priceUpdater());
+curl http://127.0.0.1:3001/racers
+const turbo = await ethers.getContractAt("TurboRacers", "0x5fbdb2315678afecb367f032d93f642f64180aa3");await turbo.owner();
