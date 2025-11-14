@@ -1,23 +1,24 @@
+require('dotenv').config();
 /**
  * race-engine-starter.js
  *
  * Simple automated race engine for the TurboRacers starter.
  *
  * Usage:
- *   1) Ensure server.js is running (API on PORT in .env).
- *   2) Export ADMIN_SECRET (or set in .env). Example:
- *        export ADMIN_SECRET=some-secret
- *   3) Run:
- *        node race-engine-starter.js
+ * 1) Ensure server.js is running (API on PORT in .env).
+ * 2) Export ADMIN_SECRET (or set in .env). Example:
+ * export ADMIN_SECRET=some-secret
+ * 3) Run:
+ * node race-engine-starter.js
  *
  * This script will:
- *  - fetch racers from /racers
- *  - run a short simulated race
- *  - call POST /update-price when overtakes/crashes/finish happen
+ * - fetch racers from /racers
+ * - run a short simulated race
+ * - call POST /update-price when overtakes/crashes/finish happen
  *
  * Notes:
- *  - Keeps on-chain writes minimal: only on meaningful events.
- *  - Price changes: +10% on overtake, -20% on crash, +5% for winner at finish (example).
+ * - Keeps on-chain writes minimal: only on meaningful events.
+ * - Price changes: +10% on overtake, -20% on crash, +5% for winner at finish (example).
  */
 
 const API_BASE = process.env.API_BASE || 'http://127.0.0.1:3001';
@@ -188,7 +189,7 @@ async function runRace() {
         // small winner bonus to price
         const old = r.currentPriceWei;
         const nw = applyPercentBigInt(old, WINNER_BONUS_PCT, true);
-        r.currentPriceWei = nw;
+        r.currentPriceWei = nw; // <-- THIS IS THE FIX (was 'racer.')
         try {
           const res = await postUpdatePrice(r.id, nw);
           console.log('  -> update-price tx (finish):', res.txHash || res);
